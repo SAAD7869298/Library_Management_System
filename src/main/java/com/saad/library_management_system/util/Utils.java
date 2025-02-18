@@ -1,10 +1,11 @@
 package com.saad.library_management_system.util;
 
 import java.time.Instant;
+import java.util.UUID;
 
 public class Utils {
 
-    public static int getRandomInt() {
-        return Instant.now().getNano();
+    public static UUID getRandomInt() {
+        return UUID.randomUUID();
     }
 }

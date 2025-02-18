@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Table
@@ -19,7 +20,7 @@ public class Book {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
-    private int bookId;
+    private UUID bookId;
 
     @Column(name = "title", nullable = false)
     private String title;

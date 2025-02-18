@@ -10,8 +10,8 @@ import java.util.Date;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class BookDto {
 
     @NotNull(message = "Title is required")

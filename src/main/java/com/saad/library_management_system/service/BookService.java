@@ -9,12 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
 public class BookService {
 
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     @Autowired
     public BookService(BookRepository bookRepository) {
@@ -24,7 +25,7 @@ public class BookService {
     public void saveBook(BookDto bookDto) {
         Book book = BookTransformation.toBook(bookDto);
         bookRepository.save(book);
-       log.info("Book saved: {} " + book.getBookId());
+       log.info("Book saved:  " + book.getBookId());
     }
 
     public List<BookDto> getAllBooks() {
@@ -33,16 +34,16 @@ public class BookService {
                 .toList();
     }
 
-    public BookDto getBookById(int bookId) {
+    public BookDto getBookById(UUID bookId) {
         return bookRepository.findById(bookId)
                 .map(BookTransformation::toBookDto)
                 .orElseThrow(() -> {
-                    throw new BookNotFoundException("Book with ID " + bookId + " not found");
-                });
+            log.info("Book not found: {}", bookId);
+            throw new BookNotFoundException("Book with ID " + bookId + " not found");
+        });
     }
 
-    public void updateBook(int bookId, BookDto bookDto) {
-
+    public void updateBook(UUID bookId, BookDto bookDto) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> {
                     throw new BookNotFoundException("Book with ID " + bookId + " not found");
@@ -60,7 +61,7 @@ public class BookService {
         bookRepository.save(book);
     }
 
-    public void deleteBook(int bookId) {
+    public void deleteBook(UUID bookId) {
         bookRepository.findById(bookId).ifPresentOrElse(book -> {
             bookRepository.delete(book);
             log.info("Book deleted: {}", bookId);

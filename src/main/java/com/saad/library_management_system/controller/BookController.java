@@ -1,6 +1,5 @@
 package com.saad.library_management_system.controller;
 
-import com.saad.library_management_system.error.exception.BookNotFoundException;
 import com.saad.library_management_system.model.dto.BookDto;
 import com.saad.library_management_system.service.BookService;
 import jakarta.validation.Valid;
@@ -8,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/books")
@@ -34,17 +33,17 @@ public class BookController {
     }
 
     @GetMapping("find/{id}")
-    public BookDto findById(@PathVariable int id) {
+    public BookDto findById(@PathVariable UUID id) {
         return bookService.getBookById(id);
     }
 
     @PutMapping("update/{id}")
-    public void updateBook(@PathVariable int id, @Valid @RequestBody BookDto bookDto) {
+    public void updateBook(@PathVariable UUID id, @Valid @RequestBody BookDto bookDto) {
         bookService.updateBook(id, bookDto);
     }
 
     @DeleteMapping("delete/{id}")
-    public void deleteBook(@PathVariable int id) {
+    public void deleteBook(@PathVariable UUID id) {
         bookService.deleteBook(id);
     }
 
