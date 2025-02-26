@@ -39,21 +39,20 @@ public class BorrowController {
         borrowService.updateBorrow(borrowId, borrowDto);
     }
 
-
+    @PutMapping("/return")
+    public void returnBorrow(@RequestParam String bookTitle, @RequestParam String username) {
+        borrowService.returnBook(bookTitle, username);
+    }
+//***
     @GetMapping("/user/{userId}")
     public List<BorrowDto> getBorrowsByUserId(@PathVariable UUID userId) {
-        return borrowService.findByUserId(userId);
+        return borrowService.getAllBorrowsByUser(userId);
     }
-
+//***
     @GetMapping("/book/{bookId}")
     public List<BorrowDto> getBorrowsByBookId(@PathVariable UUID bookId) {
-        return borrowService.findByBookId(bookId);
+        return borrowService.getAllBorrowsByBook(bookId);
     }
-
-//    @GetMapping("/book/{bookId}/user/{userId}")
-//    public BorrowDto getBorrowByBookAndUser(@PathVariable UUID bookId, @PathVariable UUID userId) {
-//        return borrowService.findByBookAndUser(bookId, userId);
-//    }
 
     @DeleteMapping("/{borrowId}")
     public void deleteBorrow(@PathVariable UUID borrowId) {

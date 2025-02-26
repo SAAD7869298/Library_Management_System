@@ -1,9 +1,13 @@
 package com.saad.library_management_system.model.dto;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -20,8 +24,8 @@ public class BorrowDto {
     private Date returnDate;
 
     @NotNull(message = "Book ID is required")
-    private BookDto book;
+    private UUID bookId;
 
     @NotNull(message = "User ID is required")
-    private UserDto user;
+    private UUID userId;
 }

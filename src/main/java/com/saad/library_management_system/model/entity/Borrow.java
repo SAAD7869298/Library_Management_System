@@ -1,9 +1,6 @@
 package com.saad.library_management_system.model.entity;
 
 import jakarta.persistence.*;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
